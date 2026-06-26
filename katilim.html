@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Katılım Formu — Ünal & Gurbet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal:    #1f3a42;
+      --teal-lt: #2e5566;
+      --sky1:    #b8dff0;
+      --sky2:    #d6eefc;
+      --sky3:    #edf7fd;
+      --cream:   #faf6f0;
+      --gold:    #b89c72;
+      --rose:    #c9a0a8;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      color: var(--teal);
+      min-height: 100svh;
+      background: linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 40%, var(--sky3) 70%, #f0ece4 100%);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 40px 20px 60px;
+      position: relative; overflow-x: hidden;
+    }
+
+    #birds { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .bird { position: absolute; animation: bird-fly linear infinite; will-change: transform; }
+    @keyframes bird-fly {
+      0%   { transform: translateX(-10vw) translateY(0px); opacity: 0; }
+      5%   { opacity: 1; } 95% { opacity: 1; }
+      100% { transform: translateX(110vw) translateY(var(--dy)); opacity: 0; }
+    }
+    .bird-svg { animation: wing-flap 0.4s ease-in-out infinite alternate; }
+    @keyframes wing-flap { from { transform: scaleY(1); } to { transform: scaleY(0.55); } }
+
+    .page-content { position: relative; z-index: 1; width: 100%; max-width: 480px; }
+
+    .page-header { text-align: center; margin-bottom: 32px; }
+    .page-names { font-family: 'Great Vibes', cursive; font-size: clamp(44px, 10vw, 68px); color: var(--teal); line-height: 1.1; }
+    .page-sub { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.3em; color: var(--teal-lt); margin-top: 6px; }
+    .divider { width: 50px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 16px auto; }
+
+    /* ── FORM KARTI ───────────────────────────── */
+    .form-card {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(31,58,66,0.13);
+      border-radius: 24px; padding: 36px 28px;
+      box-shadow: 0 8px 40px rgba(31,58,66,0.10);
+    }
+    .form-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 5vw, 28px); font-weight: 400;
+      color: var(--teal); margin-bottom: 6px; text-align: center;
+    }
+    .form-card-desc {
+      font-family: 'Montserrat', sans-serif; font-weight: 300;
+      font-size: 12px; color: var(--teal-lt); letter-spacing: 0.05em;
+      text-align: center; margin-bottom: 28px; line-height: 1.6;
+    }
+
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block; font-family: 'Montserrat', sans-serif;
+      font-weight: 300; font-size: 11px; letter-spacing: 0.15em;
+      color: var(--teal-lt); margin-bottom: 7px;
+    }
+    .field input[type="text"],
+    .field input[type="number"],
+    .field textarea,
+    .field select {
+      width: 100%; padding: 12px 16px;
+      border: 1.5px solid rgba(31,58,66,0.2); border-radius: 12px;
+      font-family: 'Cormorant Garamond', serif; font-size: 17px;
+      color: var(--teal); background: white; outline: none;
+      transition: border-color 0.2s; appearance: none;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--teal); }
+    .field textarea { resize: vertical; min-height: 90px; font-size: 16px; }
+    .field input[type="number"] { -moz-appearance: textfield; }
+    .field input[type="number"]::-webkit-inner-spin-button { display: none; }
+
+    /* Radyo butonları */
+    .radio-group { display: flex; gap: 10px; }
+    .radio-opt { flex: 1; }
+    .radio-opt input[type="radio"] { display: none; }
+    .radio-opt label {
+      display: flex; align-items: center; justify-content: center;
+      padding: 11px 8px;
+      border: 1.5px solid rgba(31,58,66,0.2); border-radius: 12px;
+      font-family: 'Cormorant Garamond', serif; font-size: 16px;
+      color: var(--teal-lt); cursor: pointer;
+      transition: all 0.18s; text-align: center; gap: 6px;
+    }
+    .radio-opt input[type="radio"]:checked + label {
+      border-color: var(--teal); background: var(--teal); color: white;
+    }
+
+    /* Gönder butonu */
+    #submit-btn {
+      width: 100%; margin-top: 8px; padding: 14px;
+      background: var(--teal); color: white; border: none; border-radius: 12px;
+      font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 300;
+      letter-spacing: 0.15em; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    #submit-btn:hover:not(:disabled) { opacity: 0.85; transform: translateY(-1px); }
+    #submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Başarı */
+    #success-msg {
+      display: none; text-align: center; padding: 28px 20px;
+    }
+    .success-icon { font-size: 48px; margin-bottom: 12px; }
+    .success-title { font-family: 'Great Vibes', cursive; font-size: 42px; color: var(--teal); margin-bottom: 8px; }
+    .success-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--teal-lt); line-height: 1.7; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 24px; font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 300; letter-spacing: 0.15em;
+      color: var(--teal-lt); text-decoration: none;
+    }
+    .back-link:hover { color: var(--teal); }
+  </style>
+</head>
+<body>
+<div id="birds"></div>
+
+<div class="page-content">
+  <div class="page-header">
+    <p class="page-names">Ünal ve Gurbet</p>
+    <p class="page-sub">10 TEMMUZ 2026 · CUMA · 19:00</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="form-card">
+    <p class="form-card-title">Katılım Formu</p>
+    <p class="form-card-desc">Düğünümüze katılıp katılamayacağınızı bize bildirin,<br>planlamamıza yardımcı olun.</p>
+
+    <div id="form-wrap">
+      <form name="katilim" data-netlify="true" netlify-honeypot="bot-field" id="rsvp-form" novalidate>
+        <input type="hidden" name="form-name" value="katilim" />
+        <p style="display:none"><input name="bot-field" /></p>
+
+        <div class="field">
+          <label>AD SOYAD</label>
+          <input type="text" name="ad_soyad" placeholder="Adınızı girin" required />
+        </div>
+
+        <div class="field">
+          <label>DÜĞÜNE KATILACAK MISINIZ?</label>
+          <div class="radio-group">
+            <div class="radio-opt">
+              <input type="radio" name="katilim" id="evet" value="Evet, katılacağım" required />
+              <label for="evet">✓ Evet, katılacağım</label>
+            </div>
+            <div class="radio-opt">
+              <input type="radio" name="katilim" id="hayir" value="Hayır, katılamayacağım" />
+              <label for="hayir">✗ Katılamayacağım</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field" id="kisi-field">
+          <label>KAÇ KİŞİ OLACAKSINIZ? (kendiniz dahil)</label>
+          <input type="number" name="kisi_sayisi" min="1" max="20" placeholder="1" value="1" />
+        </div>
+
+        <div class="field">
+          <label>NOT (opsiyonel)</label>
+          <textarea name="not" placeholder="Varsa bir notunuzu bırakın..."></textarea>
+        </div>
+
+        <button type="submit" id="submit-btn">Gönder</button>
+      </form>
+    </div>
+
+    <div id="success-msg">
+      <div class="success-icon">🌸</div>
+      <p class="success-title">Teşekkürler!</p>
+      <p class="success-text">Yanıtınız iletildi.<br>Sizi görmekten çok mutlu olacağız.</p>
+    </div>
+  </div>
+
+  <div style="text-align:center">
+    <a href="index.html" class="back-link">‹ Ana Menü</a>
+  </div>
+</div>
+
+<script>
+/* ─── Kuşlar ──────────────────────────────────────────────────── */
+(function() {
+  const c = document.getElementById('birds');
+  for (let i = 0; i < 14; i++) {
+    const w = document.createElement('div'); w.className = 'bird';
+    const sz = 12+Math.random()*18, t = 3+Math.random()*60, d = 9+Math.random()*13, dy = (Math.random()-.5)*50, dl = -Math.random()*d;
+    w.style.cssText = `top:${t}%;left:0;--dy:${dy}px;animation-duration:${d}s;animation-delay:${dl}s`;
+    const ns='http://www.w3.org/2000/svg', svg=document.createElementNS(ns,'svg');
+    svg.setAttribute('width',sz); svg.setAttribute('height',sz*.5); svg.setAttribute('viewBox','0 0 40 20'); svg.classList.add('bird-svg');
+    svg.style.animationDuration=(.3+Math.random()*.2)+'s';
+    const p=document.createElementNS(ns,'path');
+    p.setAttribute('d','M0,10 Q5,2 10,8 Q15,3 20,10 Q25,3 30,8 Q35,2 40,10');
+    p.setAttribute('stroke',`rgba(60,80,100,${.4+Math.random()*.35})`); p.setAttribute('stroke-width','1.6'); p.setAttribute('fill','none'); p.setAttribute('stroke-linecap','round');
+    svg.appendChild(p); w.appendChild(svg); c.appendChild(w);
+  }
+})();
+
+/* ─── Katılım seçeneğine göre kişi alanını gizle/göster ─────── */
+document.querySelectorAll('input[name="katilim"]').forEach(r => {
+  r.addEventListener('change', () => {
+    document.getElementById('kisi-field').style.display =
+      r.value === 'Evet, katılacağım' ? 'block' : 'none';
+  });
+});
+
+/* ─── Form gönder ────────────────────────────────────────────── */
+document.getElementById('rsvp-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn  = document.getElementById('submit-btn');
+
+  // Basit doğrulama
+  const ad = form.ad_soyad.value.trim();
+  const kat = form.katilim.value;
+  if (!ad) { alert('Lütfen adınızı girin.'); return; }
+  if (!kat) { alert('Lütfen katılım durumunuzu seçin.'); return; }
+
+  btn.disabled = true; btn.textContent = 'Gönderiliyor…';
+
+  try {
+    const body = new URLSearchParams(new FormData(form));
+    const res  = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+    if (res.ok) {
+      document.getElementById('form-wrap').style.display   = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    } else {
+      throw new Error(res.status);
+    }
+  } catch {
+    btn.disabled = false; btn.textContent = 'Gönder';
+    alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+  }
+});
+</script>
+</body>
+</html>

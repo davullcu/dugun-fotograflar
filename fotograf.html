@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Fotoğraf Paylaş — Ünal & Gurbet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal:    #1f3a42;
+      --teal-lt: #2e5566;
+      --sky1:    #b8dff0;
+      --sky2:    #d6eefc;
+      --sky3:    #edf7fd;
+      --cream:   #faf6f0;
+      --gold:    #b89c72;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      color: var(--teal);
+      min-height: 100svh;
+      background: linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 40%, var(--sky3) 70%, #e8f5fb 100%);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 40px 20px 60px;
+      position: relative; overflow-x: hidden;
+    }
+
+    #birds { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .bird { position: absolute; animation: bird-fly linear infinite; will-change: transform; }
+    @keyframes bird-fly {
+      0%   { transform: translateX(-10vw) translateY(0px); opacity: 0; }
+      5%   { opacity: 1; } 95% { opacity: 1; }
+      100% { transform: translateX(110vw) translateY(var(--dy)); opacity: 0; }
+    }
+    .bird-svg { animation: wing-flap 0.4s ease-in-out infinite alternate; }
+    @keyframes wing-flap { from { transform: scaleY(1); } to { transform: scaleY(0.55); } }
+
+    .page-content { position: relative; z-index: 1; width: 100%; max-width: 480px; }
+
+    .page-header { text-align: center; margin-bottom: 32px; }
+    .page-names { font-family: 'Great Vibes', cursive; font-size: clamp(44px, 10vw, 68px); color: var(--teal); line-height: 1.1; }
+    .page-sub { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.3em; color: var(--teal-lt); margin-top: 6px; }
+    .divider { width: 50px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 16px auto; }
+
+    /* ── KART ─────────────────────────────────── */
+    .upload-card {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(31,58,66,0.13);
+      border-radius: 24px; padding: 36px 28px;
+      box-shadow: 0 8px 40px rgba(31,58,66,0.10);
+    }
+    .card-icon { font-size: 40px; display: block; text-align: center; margin-bottom: 12px; }
+    .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px,5vw,28px); font-weight: 400; color: var(--teal); text-align: center; margin-bottom: 6px; }
+    .card-desc { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 12px; color: var(--teal-lt); text-align: center; line-height: 1.6; margin-bottom: 24px; }
+
+    /* ── KİLİT EKRANI ─────────────────────────── */
+    #locked-screen { display: none; text-align: center; }
+    .lock-icon { font-size: 52px; margin-bottom: 12px; display: block; }
+    .lock-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--teal); margin-bottom: 8px; }
+    .lock-desc { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 12px; color: var(--teal-lt); line-height: 1.7; }
+    .lock-countdown { margin-top: 20px; font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--teal); }
+    .lock-cd-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 300; letter-spacing: 0.2em; color: var(--teal-lt); margin-top: 4px; }
+
+    /* ── PIN EKRANI ───────────────────────────── */
+    #pin-screen { display: none; }
+    .pin-label { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; letter-spacing: 0.1em; color: var(--teal-lt); margin-bottom: 12px; text-align: left; }
+    .pin-row { display: flex; gap: 10px; }
+    #pin-input { flex: 1; padding: 13px 16px; border: 1.5px solid rgba(31,58,66,0.25); border-radius: 12px; font-size: 18px; font-family: 'Montserrat', sans-serif; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: var(--teal); background: white; text-align: center; outline: none; transition: border-color 0.2s; }
+    #pin-input:focus { border-color: var(--teal); }
+    #pin-btn { padding: 13px 22px; background: var(--teal); color: white; border: none; border-radius: 12px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 300; letter-spacing: 0.1em; cursor: pointer; transition: opacity 0.2s; white-space: nowrap; }
+    #pin-btn:hover:not(:disabled) { opacity: 0.85; }
+    #pin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    #pin-error { display: none; margin-top: 10px; padding: 10px 14px; background: #fff0f0; border-radius: 10px; color: #b33; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; }
+
+    /* ── YÜKLEME EKRANI ───────────────────────── */
+    #upload-screen { display: none; }
+    .drop-zone { border: 1.5px dashed rgba(31,58,66,0.3); border-radius: 16px; padding: 32px 16px; cursor: pointer; transition: all 0.2s; background: rgba(255,255,255,0.5); position: relative; text-align: center; }
+    .drop-zone:hover, .drop-zone.drag-over { border-color: var(--teal); background: rgba(31,58,66,0.04); }
+    .drop-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .drop-zone-icon { font-size: 32px; margin-bottom: 8px; display: block; }
+    .drop-zone-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: var(--teal); margin-bottom: 4px; }
+    .drop-zone-hint { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 300; color: var(--teal-lt); }
+
+    #file-list { margin-top: 16px; text-align: left; }
+    .file-item { padding: 9px 12px; background: rgba(255,255,255,0.7); border-radius: 10px; margin-bottom: 7px; }
+    .file-row { display: flex; align-items: center; gap: 8px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; color: var(--teal); }
+    .file-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-status { font-size: 11px; font-weight: 400; white-space: nowrap; }
+    .s-pending { color: #999; } .s-uploading { color: #c07a00; } .s-done { color: #2e7d32; } .s-error { color: #c62828; }
+    .progress-wrap { height: 3px; background: rgba(31,58,66,0.1); border-radius: 3px; margin-top: 5px; overflow: hidden; display: none; }
+    .progress-bar { height: 100%; background: var(--teal); width: 0%; transition: width 0.15s; }
+
+    #send-btn { margin-top: 20px; width: 100%; padding: 14px; background: var(--teal); color: white; border: none; border-radius: 12px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 300; letter-spacing: 0.15em; cursor: pointer; transition: opacity 0.2s, transform 0.15s; }
+    #send-btn:hover:not(:disabled) { opacity: 0.85; transform: translateY(-1px); }
+    #send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    #upload-success { display: none; margin-top: 18px; padding: 14px; background: #f0faf3; border-radius: 12px; font-family: 'Cormorant Garamond', serif; font-size: 17px; color: #2e7d32; text-align: center; line-height: 1.6; }
+    #upload-err { display: none; margin-top: 12px; padding: 12px; background: #fff0f0; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 12px; color: #b33; }
+
+    .back-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 0.15em; color: var(--teal-lt); text-decoration: none; }
+    .back-link:hover { color: var(--teal); }
+  </style>
+</head>
+<body>
+<div id="birds"></div>
+
+<div class="page-content">
+  <div class="page-header">
+    <p class="page-names">Ünal ve Gurbet</p>
+    <p class="page-sub">10 TEMMUZ 2026 · CUMA</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="upload-card">
+    <span class="card-icon">📷</span>
+    <p class="card-title">Fotoğraf Paylaş</p>
+    <p class="card-desc">Çektiğiniz anları bizimle paylaşın</p>
+
+    <!-- Kilitli ekran -->
+    <div id="locked-screen">
+      <span class="lock-icon">🔒</span>
+      <p class="lock-title">Henüz aktif değil</p>
+      <p class="lock-desc">Bu bölüm düğün başladıktan sonra<br>kullanıma açılacak.</p>
+      <div class="lock-countdown" id="lock-cd">--:--:--</div>
+      <p class="lock-cd-label">KALAN SÜRE</p>
+    </div>
+
+    <!-- PIN ekranı -->
+    <div id="pin-screen">
+      <p class="pin-label">Masa kartınızdaki kodu girin:</p>
+      <div class="pin-row">
+        <input type="text" id="pin-input" maxlength="12" placeholder="● ● ● ● ●" autocomplete="off" spellcheck="false" />
+        <button id="pin-btn">Giriş</button>
+      </div>
+      <div id="pin-error"></div>
+    </div>
+
+    <!-- Yükleme ekranı -->
+    <div id="upload-screen">
+      <div class="drop-zone" id="drop-zone">
+        <input type="file" id="file-input" multiple accept="image/*,video/*" />
+        <span class="drop-zone-icon">🖼️</span>
+        <p class="drop-zone-text">Fotoğraf veya video seçin</p>
+        <p class="drop-zone-hint">veya buraya sürükleyip bırakın</p>
+      </div>
+      <div id="file-list"></div>
+      <button id="send-btn" disabled>Yükle</button>
+      <div id="upload-success">✅ Teşekkürler!<br />Fotoğraflarınız başarıyla kaydedildi. 🌸</div>
+      <div id="upload-err"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center">
+    <a href="index.html" class="back-link">‹ Ana Menü</a>
+  </div>
+</div>
+
+<script>
+/* ─── Kuşlar ──────────────────────────────────────────────────── */
+(function() {
+  const c = document.getElementById('birds');
+  for (let i = 0; i < 14; i++) {
+    const w = document.createElement('div'); w.className = 'bird';
+    const sz=12+Math.random()*18,t=3+Math.random()*60,d=9+Math.random()*13,dy=(Math.random()-.5)*50,dl=-Math.random()*d;
+    w.style.cssText=`top:${t}%;left:0;--dy:${dy}px;animation-duration:${d}s;animation-delay:${dl}s`;
+    const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
+    svg.setAttribute('width',sz);svg.setAttribute('height',sz*.5);svg.setAttribute('viewBox','0 0 40 20');svg.classList.add('bird-svg');
+    svg.style.animationDuration=(.3+Math.random()*.2)+'s';
+    const p=document.createElementNS(ns,'path');
+    p.setAttribute('d','M0,10 Q5,2 10,8 Q15,3 20,10 Q25,3 30,8 Q35,2 40,10');
+    p.setAttribute('stroke',`rgba(60,80,100,${.4+Math.random()*.35})`);p.setAttribute('stroke-width','1.6');p.setAttribute('fill','none');p.setAttribute('stroke-linecap','round');
+    svg.appendChild(p);w.appendChild(svg);c.appendChild(w);
+  }
+})();
+
+/* ─── Saat kilidi ─────────────────────────────────────────────── */
+const UNLOCK = new Date('2026-07-10T19:00:00');
+
+function updateLockScreen() {
+  const diff = UNLOCK - Date.now();
+  if (diff <= 0) return false; // kilidi aç
+  const totalSec = Math.floor(diff / 1000);
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+  const d = Math.floor(h / 24);
+  const hr = h % 24;
+  document.getElementById('lock-cd').textContent =
+    d > 0 ? `${d} gün ${String(hr).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`
+           : `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return true;
+}
+
+function showSection(id) {
+  ['locked-screen','pin-screen','upload-screen'].forEach(s => {
+    document.getElementById(s).style.display = s === id ? 'block' : 'none';
+  });
+}
+
+if (Date.now() < UNLOCK.getTime()) {
+  showSection('locked-screen');
+  updateLockScreen();
+  const lockTimer = setInterval(() => {
+    if (!updateLockScreen()) {
+      clearInterval(lockTimer);
+      showSection('pin-screen');
+    }
+  }, 1000);
+} else {
+  showSection('pin-screen');
+}
+
+/* ─── PIN doğrulama ───────────────────────────────────────────── */
+let sessionToken=null, supabaseUrl=null, supabaseKey=null, supabaseBucket=null;
+const pinInput=document.getElementById('pin-input'), pinBtn=document.getElementById('pin-btn'), pinError=document.getElementById('pin-error');
+
+pinInput.addEventListener('keydown', e => { if (e.key==='Enter') pinBtn.click(); });
+pinBtn.addEventListener('click', async () => {
+  const code = pinInput.value.trim().toUpperCase();
+  if (!code) return;
+  pinBtn.disabled=true; pinBtn.textContent='…'; pinError.style.display='none';
+  try {
+    const res  = await fetch('/api/verify-code', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({code}) });
+    const data = await res.json();
+    if (res.ok && data.token) {
+      sessionToken=data.token; supabaseUrl=data.supabaseUrl; supabaseKey=data.supabaseKey; supabaseBucket=data.supabaseBucket;
+      showSection('upload-screen');
+    } else {
+      pinError.textContent=data.error||'Geçersiz kod. Lütfen tekrar deneyin.';
+      pinError.style.display='block'; pinInput.value=''; pinInput.focus();
+    }
+  } catch { pinError.textContent='Bağlantı hatası. Lütfen tekrar deneyin.'; pinError.style.display='block'; }
+  pinBtn.disabled=false; pinBtn.textContent='Giriş';
+});
+
+/* ─── Dosya yükleme ───────────────────────────────────────────── */
+const dropZone=document.getElementById('drop-zone'), fileInput=document.getElementById('file-input');
+const fileList=document.getElementById('file-list'), sendBtn=document.getElementById('send-btn');
+const successEl=document.getElementById('upload-success'), errorEl=document.getElementById('upload-err');
+let files=[];
+
+dropZone.addEventListener('dragover', e=>{e.preventDefault();dropZone.classList.add('drag-over');});
+dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop',e=>{e.preventDefault();dropZone.classList.remove('drag-over');addFiles([...e.dataTransfer.files]);});
+fileInput.addEventListener('change',()=>addFiles([...fileInput.files]));
+
+function addFiles(newFiles) {
+  newFiles.forEach(f=>{ if(!files.find(x=>x.name===f.name&&x.size===f.size)) files.push(f); });
+  renderList(); sendBtn.disabled=files.length===0;
+}
+function renderList() {
+  fileList.innerHTML='';
+  files.forEach((f,i)=>{
+    const div=document.createElement('div'); div.className='file-item';
+    div.innerHTML=`<div class="file-row"><span>📄</span><span class="file-name">${f.name}</span><span class="file-status s-pending" id="fs-${i}">Bekliyor</span></div><div class="progress-wrap" id="pw-${i}"><div class="progress-bar" id="pb-${i}"></div></div>`;
+    fileList.appendChild(div);
+  });
+}
+sendBtn.addEventListener('click', async()=>{
+  if (!files.length||!supabaseUrl) return;
+  sendBtn.disabled=true; successEl.style.display='none'; errorEl.style.display='none';
+  let allOk=true;
+  for (let i=0;i<files.length;i++) {
+    const f=files[i];
+    const st=document.getElementById(`fs-${i}`),pw=document.getElementById(`pw-${i}`),pb=document.getElementById(`pb-${i}`);
+    st.textContent='Yükleniyor…'; st.className='file-status s-uploading'; pw.style.display='block';
+    try {
+      const ts=new Date().toISOString().replace(/[:.]/g,'-');
+      const name=f.name.replace(/[^a-zA-Z0-9._\-]/g,'_');
+      await uploadXHR(f,`${supabaseUrl}/storage/v1/object/${supabaseBucket}/${encodeURIComponent(ts+'_'+name)}`,pct=>{pb.style.width=pct+'%';});
+      st.textContent='✓ Yüklendi'; st.className='file-status s-done';
+    } catch { st.textContent='✗ Hata'; st.className='file-status s-error'; allOk=false; }
+  }
+  if (allOk) { successEl.style.display='block'; }
+  else { errorEl.textContent='Bazı dosyalar yüklenemedi. Lütfen tekrar deneyin.'; errorEl.style.display='block'; sendBtn.disabled=false; sendBtn.textContent='Tekrar Dene'; }
+});
+function uploadXHR(file,url,onProgress) {
+  return new Promise((resolve,reject)=>{
+    const xhr=new XMLHttpRequest();
+    xhr.open('POST',url);
+    xhr.setRequestHeader('Authorization',`Bearer ${supabaseKey}`);
+    xhr.setRequestHeader('Content-Type',file.type||'application/octet-stream');
+    xhr.setRequestHeader('x-upsert','false');
+    xhr.upload.onprogress=e=>{if(e.lengthComputable)onProgress(Math.round(e.loaded/e.total*100));};
+    xhr.onload=()=>xhr.status<300?resolve():reject(new Error(xhr.status));
+    xhr.onerror=()=>reject(new Error('Ağ hatası'));
+    xhr.send(file);
+  });
+}
+</script>
+</body>
+</html>

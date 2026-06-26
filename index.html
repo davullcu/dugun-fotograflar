@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Ünal & Gurbet — 10 Temmuz 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal:    #1f3a42;
+      --teal-lt: #2e5566;
+      --sky1:    #b8dff0;
+      --sky2:    #d6eefc;
+      --sky3:    #edf7fd;
+      --cream:   #faf6f0;
+      --gold:    #b89c72;
+      --rose:    #c9a0a8;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      color: var(--teal);
+      background: var(--cream);
+      overflow-x: hidden;
+      min-height: 100svh;
+    }
+
+    /* ── HERO ─────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(180deg,
+        var(--sky1) 0%, var(--sky2) 45%, var(--sky3) 75%, #f0ece4 100%);
+    }
+
+    #birds { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+
+    .bird { position: absolute; animation: bird-fly linear infinite; will-change: transform; }
+    @keyframes bird-fly {
+      0%   { transform: translateX(-10vw) translateY(0px); opacity: 0; }
+      5%   { opacity: 1; }
+      95%  { opacity: 1; }
+      100% { transform: translateX(110vw) translateY(var(--dy)); opacity: 0; }
+    }
+    .bird-svg { animation: wing-flap 0.4s ease-in-out infinite alternate; }
+    @keyframes wing-flap {
+      from { transform: scaleY(1); }
+      to   { transform: scaleY(0.55); }
+    }
+
+    .hero-top {
+      position: relative; z-index: 2;
+      text-align: center; padding: 60px 24px 24px;
+    }
+    .couple-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(56px, 12vw, 96px);
+      color: var(--teal); line-height: 1.1;
+    }
+    .evleniyoruz {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300; font-size: clamp(10px, 2vw, 13px);
+      letter-spacing: 0.35em; color: var(--teal-lt); margin-top: 6px;
+    }
+    .hero-date {
+      margin-top: 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(15px, 3vw, 20px); font-weight: 300;
+      color: var(--teal-lt); letter-spacing: 0.1em;
+    }
+
+    .divider {
+      width: 50px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 20px auto;
+    }
+
+    /* ── KARTLAR ──────────────────────────────── */
+    .cards-wrap {
+      position: relative; z-index: 2;
+      padding: 0 20px 60px;
+      width: 100%; max-width: 480px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+
+    .card {
+      display: block;
+      background: rgba(255,255,255,0.80);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(31,58,66,0.14);
+      border-radius: 20px;
+      padding: 22px 24px;
+      text-decoration: none;
+      color: var(--teal);
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+      cursor: pointer;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(31,58,66,0.13); background: rgba(255,255,255,0.92); }
+    .card.disabled { opacity: 0.55; cursor: not-allowed; pointer-events: none; }
+
+    .card-inner { display: flex; align-items: center; gap: 16px; }
+    .card-icon { font-size: 32px; flex-shrink: 0; }
+    .card-body { flex: 1; text-align: left; }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 4vw, 22px); font-weight: 400; color: var(--teal);
+    }
+    .card-desc {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300; font-size: 11px; color: var(--teal-lt);
+      letter-spacing: 0.05em; margin-top: 4px; line-height: 1.5;
+    }
+    .card-arrow {
+      font-size: 20px; color: var(--gold); flex-shrink: 0;
+      transition: transform 0.18s;
+    }
+    .card:hover .card-arrow { transform: translateX(4px); }
+
+    .card-badge {
+      display: inline-block; margin-top: 8px;
+      padding: 3px 10px; border-radius: 100px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 400; letter-spacing: 0.1em;
+    }
+    .badge-soon { background: rgba(31,58,66,0.08); color: var(--teal-lt); }
+    .badge-open { background: rgba(46,165,110,0.12); color: #2e7d32; }
+  </style>
+</head>
+<body>
+
+<section id="hero">
+  <div id="birds"></div>
+
+  <div class="hero-top">
+    <h1 class="couple-names">Ünal ve Gurbet</h1>
+    <p class="evleniyoruz">E V L E N İ Y O R U Z</p>
+    <p class="hero-date">10 Temmuz 2026 · Cuma · 19:00</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="cards-wrap">
+
+    <a href="katilim.html" class="card">
+      <div class="card-inner">
+        <span class="card-icon">✉️</span>
+        <div class="card-body">
+          <p class="card-title">Düğün Katılım Formu</p>
+          <p class="card-desc">Katılımınızı bize bildirin</p>
+        </div>
+        <span class="card-arrow">›</span>
+      </div>
+    </a>
+
+    <a href="davetiye.html" class="card">
+      <div class="card-inner">
+        <span class="card-icon">💌</span>
+        <div class="card-body">
+          <p class="card-title">Davetiye</p>
+          <p class="card-desc">Tüm detaylar, konum ve geri sayım</p>
+        </div>
+        <span class="card-arrow">›</span>
+      </div>
+    </a>
+
+    <div class="card" id="photo-card">
+      <div class="card-inner">
+        <span class="card-icon">📷</span>
+        <div class="card-body">
+          <p class="card-title">Fotoğraf Paylaş</p>
+          <p class="card-desc">Çektiğiniz anları bizimle paylaşın</p>
+          <span class="card-badge badge-soon" id="photo-badge">— Düğün başladığında aktif olacak</span>
+        </div>
+        <span class="card-arrow" id="photo-arrow" style="opacity:0.3">›</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+/* ─── Kuşlar ──────────────────────────────────────────────────── */
+(function() {
+  const container = document.getElementById('birds');
+  for (let i = 0; i < 16; i++) {
+    const wrap = document.createElement('div');
+    wrap.className = 'bird';
+    const size  = 14 + Math.random() * 20;
+    const top   = 5  + Math.random() * 65;
+    const dur   = 8  + Math.random() * 14;
+    const dy    = (Math.random() - 0.5) * 60;
+    const delay = -Math.random() * dur;
+    wrap.style.cssText = `top:${top}%;left:0;--dy:${dy}px;animation-duration:${dur}s;animation-delay:${delay}s`;
+    const ns  = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('width', size); svg.setAttribute('height', size * 0.5);
+    svg.setAttribute('viewBox', '0 0 40 20'); svg.classList.add('bird-svg');
+    svg.style.animationDuration = (0.3 + Math.random() * 0.2) + 's';
+    const path = document.createElementNS(ns, 'path');
+    path.setAttribute('d', 'M0,10 Q5,2 10,8 Q15,3 20,10 Q25,3 30,8 Q35,2 40,10');
+    path.setAttribute('stroke', `rgba(60,80,100,${0.4 + Math.random() * 0.35})`);
+    path.setAttribute('stroke-width', '1.6'); path.setAttribute('fill', 'none'); path.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(path); wrap.appendChild(svg); container.appendChild(wrap);
+  }
+})();
+
+/* ─── Fotoğraf kartı aktiflik kontrolü ───────────────────────── */
+(function() {
+  const unlock = new Date('2026-07-10T19:00:00');
+  const card   = document.getElementById('photo-card');
+  const badge  = document.getElementById('photo-badge');
+  const arrow  = document.getElementById('photo-arrow');
+
+  function check() {
+    if (Date.now() >= unlock.getTime()) {
+      card.style.cursor  = 'pointer';
+      card.style.opacity = '1';
+      card.style.pointerEvents = 'auto';
+      card.onclick = () => { window.location.href = 'fotograf.html'; };
+      badge.textContent = 'Aktif';
+      badge.className   = 'card-badge badge-open';
+      arrow.style.opacity = '1';
+    } else {
+      // Kalan süreyi badge'e yaz
+      const diff  = unlock - Date.now();
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000)  / 60000);
+      badge.textContent = d > 0
+        ? `${d} gün ${h} saat sonra aktif`
+        : h > 0
+          ? `${h} saat ${m} dakika sonra aktif`
+          : `${m} dakika sonra aktif`;
+    }
+  }
+
+  check();
+  setInterval(check, 30000); // her 30 sn güncelle
+})();
+</script>
+</body>
+</html>

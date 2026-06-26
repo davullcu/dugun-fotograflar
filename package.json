@@ -1,0 +1,6 @@
+{
+  "name": "wedding-photos-uploader",
+  "version": "2.0.0",
+  "description": "Düğün fotoğraf yükleme sitesi (Supabase Storage)",
+  "dependencies": {}
+}
