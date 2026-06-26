@@ -10,14 +10,14 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --teal:    #1f3a42;
-      --teal-lt: #2e5566;
-      --sky1:    #b8dff0;
-      --sky2:    #d6eefc;
-      --sky3:    #edf7fd;
-      --cream:   #faf6f0;
-      --gold:    #b89c72;
-      --rose:    #c9a0a8;
+      --teal:    #2a3d2a;
+      --teal-lt: #4a6a4a;
+      --sky1:    #b8d4b0;
+      --sky2:    #d4e8cc;
+      --sky3:    #e8f2e4;
+      --cream:   #f8f4ee;
+      --gold:    #b5956a;
+      --rose:    #8ab08a;
     }
     html { scroll-behavior: smooth; }
     body {
@@ -38,7 +38,7 @@
       justify-content: center;
       overflow: hidden;
       background: linear-gradient(180deg,
-        var(--sky1) 0%, var(--sky2) 45%, var(--sky3) 75%, #f0ece4 100%);
+        var(--sky1) 0%, var(--sky2) 45%, var(--sky3) 75%, #f0ece8 100%);
     }
 
     #birds { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
@@ -62,18 +62,18 @@
     }
     .couple-names {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(56px, 12vw, 96px);
+      font-size: clamp(64px, 14vw, 100px);
       color: var(--teal); line-height: 1.1;
     }
     .evleniyoruz {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 300; font-size: clamp(10px, 2vw, 13px);
+      font-weight: 300; font-size: clamp(12px, 2.5vw, 14px);
       letter-spacing: 0.35em; color: var(--teal-lt); margin-top: 6px;
     }
     .hero-date {
       margin-top: 12px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(15px, 3vw, 20px); font-weight: 300;
+      font-size: clamp(17px, 3.5vw, 22px); font-weight: 300;
       color: var(--teal-lt); letter-spacing: 0.1em;
     }
 
@@ -111,11 +111,11 @@
     .card-body { flex: 1; text-align: left; }
     .card-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(18px, 4vw, 22px); font-weight: 400; color: var(--teal);
+      font-size: clamp(20px, 5vw, 26px); font-weight: 400; color: var(--teal);
     }
     .card-desc {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 300; font-size: 11px; color: var(--teal-lt);
+      font-weight: 300; font-size: 13px; color: var(--teal-lt);
       letter-spacing: 0.05em; margin-top: 4px; line-height: 1.5;
     }
     .card-arrow {
@@ -126,9 +126,9 @@
 
     .card-badge {
       display: inline-block; margin-top: 8px;
-      padding: 3px 10px; border-radius: 100px;
+      padding: 4px 12px; border-radius: 100px;
       font-family: 'Montserrat', sans-serif;
-      font-size: 10px; font-weight: 400; letter-spacing: 0.1em;
+      font-size: 12px; font-weight: 400; letter-spacing: 0.08em;
     }
     .badge-soon { background: rgba(31,58,66,0.08); color: var(--teal-lt); }
     .badge-open { background: rgba(46,165,110,0.12); color: #2e7d32; }

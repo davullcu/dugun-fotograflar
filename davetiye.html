@@ -11,14 +11,14 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --teal:    #1f3a42;
-      --teal-lt: #2e5566;
-      --sky1:    #b8dff0;
-      --sky2:    #d6eefc;
-      --sky3:    #edf7fd;
-      --cream:   #faf6f0;
-      --gold:    #b89c72;
-      --rose:    #c9a0a8;
+      --teal:    #2a3d2a;
+      --teal-lt: #4a6a4a;
+      --sky1:    #b8d4b0;
+      --sky2:    #d4e8cc;
+      --sky3:    #e8f2e4;
+      --cream:   #f8f4ee;
+      --gold:    #b5956a;
+      --rose:    #8ab08a;
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Cormorant Garamond', Georgia, serif; color: var(--teal); background: var(--cream); overflow-x: hidden; }
@@ -27,7 +27,7 @@
     #hero {
       position: relative; min-height: 100svh;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
-      background: linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 45%, var(--sky3) 75%, #f0ece4 100%);
+      background: linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 45%, var(--sky3) 75%, #f0ece8 100%);
     }
     #birds { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
     .bird { position: absolute; animation: bird-fly linear infinite; will-change: transform; }
@@ -44,8 +44,8 @@
       text-align: center; padding: 40px 20px;
       display: flex; flex-direction: column; align-items: center; gap: 14px;
     }
-    .couple-names { font-family: 'Great Vibes', cursive; font-size: clamp(52px, 10vw, 92px); color: var(--teal); line-height: 1.1; letter-spacing: 1px; }
-    .evleniyoruz { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: clamp(11px, 2.5vw, 14px); letter-spacing: 0.35em; color: var(--teal-lt); }
+    .couple-names { font-family: 'Great Vibes', cursive; font-size: clamp(62px, 12vw, 100px); color: var(--teal); line-height: 1.1; letter-spacing: 1px; }
+    .evleniyoruz { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: clamp(12px, 2.5vw, 14px); letter-spacing: 0.35em; color: var(--teal-lt); }
     .date-block { display: flex; align-items: center; gap: 18px; margin: 4px 0; }
     .date-block .d-month, .date-block .d-year { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: clamp(10px, 2vw, 13px); letter-spacing: 0.2em; color: var(--teal-lt); }
     .date-block .d-sep { width: 40px; height: 1px; background: var(--teal-lt); opacity: 0.5; }
@@ -57,8 +57,8 @@
 
     /* ── ORTAK ────────────────────────────────── */
     .section { padding: 80px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-    .section-title { font-family: 'Great Vibes', cursive; font-size: clamp(36px, 7vw, 54px); color: var(--teal); margin-bottom: 8px; line-height: 1.2; }
-    .section-subtitle { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.3em; color: var(--teal-lt); margin-bottom: 36px; }
+    .section-title { font-family: 'Great Vibes', cursive; font-size: clamp(42px, 8vw, 58px); color: var(--teal); margin-bottom: 8px; line-height: 1.2; }
+    .section-subtitle { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 13px; letter-spacing: 0.3em; color: var(--teal-lt); margin-bottom: 36px; }
     .divider { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 20px auto; }
 
     /* ── GERİ SAYIM ───────────────────────────── */
@@ -82,7 +82,7 @@
 
     /* ── MESAJ ────────────────────────────────── */
     #message { background: linear-gradient(180deg, var(--cream) 0%, white 100%); max-width: 600px; margin: 0 auto; }
-    .message-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300; font-size: clamp(17px, 3.5vw, 22px); line-height: 1.9; color: var(--teal); margin-bottom: 24px; }
+    .message-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300; font-size: clamp(19px, 4vw, 24px); line-height: 1.9; color: var(--teal); margin-bottom: 24px; }
 
     /* ── FOOTER ───────────────────────────────── */
     #footer { background: var(--teal); color: rgba(255,255,255,0.85); padding: 48px 24px; text-align: center; }
