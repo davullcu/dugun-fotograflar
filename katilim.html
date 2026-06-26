@@ -237,7 +237,7 @@ document.getElementById('rsvp-form').addEventListener('submit', async function(e
 
   try {
     const body = new URLSearchParams(new FormData(form));
-    const res  = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+    const res  = await fetch('/katilim.html', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
     if (res.ok) {
       document.getElementById('form-wrap').style.display   = 'none';
       document.getElementById('success-msg').style.display = 'block';
