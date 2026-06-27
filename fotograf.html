@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Fotoğraf Paylaş — Ünal & Gurbet</title>
+  <title>Fotoğraf Paylaş — Gurbet & Ünal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --teal:    #2a3d2a;
-      --teal-lt: #4a6a4a;
-      --sky1:    #b8d4b0;
-      --sky2:    #d4e8cc;
-      --sky3:    #e8f2e4;
+      --teal:    #1a5c85;
+      --teal-lt: #2e7aa8;
+      --sky1:    #a8d0e8;
+      --sky2:    #c8e4f2;
+      --sky3:    #e0f0f8;
       --cream:   #f8f4ee;
-      --gold:    #b5956a;
+      --gold:    #b09468;
     }
     html { scroll-behavior: smooth; }
     body {
@@ -29,15 +29,26 @@
       position: relative; overflow-x: hidden;
     }
 
+    /* ── TÜL SÜTUNLAR ─────────────────────────── */
+    .page-columns {
+      position: fixed; inset: 0; pointer-events: none; z-index: 50;
+      display: flex; justify-content: space-between;
+    }
+    .col-side { width: clamp(36px, 6vw, 64px); position: relative; flex-shrink: 0; overflow: hidden; }
+    .col-side svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    .col-side.col-right svg { transform: scaleX(-1); }
+
     #birds { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
     .bird { position: absolute; animation: bird-fly linear infinite; will-change: transform; }
     @keyframes bird-fly {
-      0%   { transform: translateX(-10vw) translateY(0px); opacity: 0; }
-      5%   { opacity: 1; } 95% { opacity: 1; }
-      100% { transform: translateX(110vw) translateY(var(--dy)); opacity: 0; }
+      0%   { transform: translateX(-15vw) translateY(0); opacity: 0; }
+      6%   { opacity: 1; } 94% { opacity: 1; }
+      100% { transform: translateX(115vw) translateY(var(--dy)); opacity: 0; }
     }
-    .bird-svg { animation: wing-flap 0.4s ease-in-out infinite alternate; }
-    @keyframes wing-flap { from { transform: scaleY(1); } to { transform: scaleY(0.55); } }
+    .wing-left  { animation: flap-left  var(--flap) ease-in-out infinite alternate; transform-origin: 50% 50%; }
+    .wing-right { animation: flap-right var(--flap) ease-in-out infinite alternate; transform-origin: 50% 50%; }
+    @keyframes flap-left  { from { transform: rotate(-8deg) scaleY(1); } to { transform: rotate(-28deg) scaleY(0.55); } }
+    @keyframes flap-right { from { transform: rotate(8deg)  scaleY(1); } to { transform: rotate(28deg)  scaleY(0.55); } }
 
     .page-content { position: relative; z-index: 1; width: 100%; max-width: 480px; }
 
@@ -107,11 +118,57 @@
   </style>
 </head>
 <body>
+<!-- Tül sütunlar -->
+<div class="page-columns" aria-hidden="true">
+  <div class="col-side col-left">
+    <svg viewBox="0 0 64 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="tul-l" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.70)"/>
+          <stop offset="60%" stop-color="rgba(255,255,255,0.25)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0.0)"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="64" height="800" fill="url(#tul-l)"/>
+      <line x1="60" y1="0" x2="60" y2="800" stroke="rgba(181,149,106,0.28)" stroke-width="1"/>
+      <g opacity="0.15" fill="#1a5c85">
+        <ellipse cx="18" cy="80"  rx="9" ry="18" transform="rotate(-20,18,80)"/>
+        <ellipse cx="12" cy="220" rx="8" ry="16" transform="rotate(-30,12,220)"/>
+        <ellipse cx="26" cy="380" rx="6" ry="13" transform="rotate(20,26,380)"/>
+        <ellipse cx="14" cy="540" rx="9" ry="18" transform="rotate(-15,14,540)"/>
+        <ellipse cx="22" cy="700" rx="7" ry="15" transform="rotate(15,22,700)"/>
+        <circle cx="22" cy="150" r="4"/> <circle cx="16" cy="460" r="3"/> <circle cx="22" cy="620" r="4"/>
+      </g>
+    </svg>
+  </div>
+  <div class="col-side col-right">
+    <svg viewBox="0 0 64 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="tul-r" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.0)"/>
+          <stop offset="40%" stop-color="rgba(255,255,255,0.25)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0.70)"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="64" height="800" fill="url(#tul-r)"/>
+      <line x1="4" y1="0" x2="4" y2="800" stroke="rgba(181,149,106,0.28)" stroke-width="1"/>
+      <g opacity="0.15" fill="#1a5c85">
+        <ellipse cx="46" cy="80"  rx="9" ry="18" transform="rotate(20,46,80)"/>
+        <ellipse cx="52" cy="220" rx="8" ry="16" transform="rotate(30,52,220)"/>
+        <ellipse cx="38" cy="380" rx="6" ry="13" transform="rotate(-20,38,380)"/>
+        <ellipse cx="50" cy="540" rx="9" ry="18" transform="rotate(15,50,540)"/>
+        <ellipse cx="42" cy="700" rx="7" ry="15" transform="rotate(-15,42,700)"/>
+        <circle cx="42" cy="150" r="4"/> <circle cx="48" cy="460" r="3"/> <circle cx="42" cy="620" r="4"/>
+      </g>
+    </svg>
+  </div>
+</div>
+
 <div id="birds"></div>
 
 <div class="page-content">
   <div class="page-header">
-    <p class="page-names">Ünal ve Gurbet</p>
+    <p class="page-names">Gurbet ve Ünal</p>
     <p class="page-sub">10 TEMMUZ 2026 · CUMA</p>
     <div class="divider"></div>
   </div>
@@ -161,20 +218,46 @@
 </div>
 
 <script>
-/* ─── Kuşlar ──────────────────────────────────────────────────── */
+/* ─── Gerçekçi Martılar ──────────────────────────────────────── */
 (function() {
-  const c = document.getElementById('birds');
+  const ns = 'http://www.w3.org/2000/svg';
+  const container = document.getElementById('birds');
+  function makeBird(size, opacity, flapDur) {
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('width', size * 2.8); svg.setAttribute('height', size);
+    svg.setAttribute('viewBox', '0 0 100 36'); svg.style.overflow = 'visible';
+    const lg = document.createElementNS(ns, 'g');
+    lg.classList.add('wing-left'); lg.style.setProperty('--flap', flapDur+'s'); lg.style.transformOrigin = '50px 18px';
+    const lp = document.createElementNS(ns, 'path');
+    lp.setAttribute('d', 'M50,18 Q32,4 8,12 Q18,16 30,16 Q40,17 50,18Z');
+    lp.setAttribute('fill', `rgba(230,235,225,${opacity})`); lp.setAttribute('stroke', `rgba(160,175,160,${opacity*0.4})`); lp.setAttribute('stroke-width','0.4');
+    lg.appendChild(lp);
+    const rg = document.createElementNS(ns, 'g');
+    rg.classList.add('wing-right'); rg.style.setProperty('--flap', flapDur+'s'); rg.style.transformOrigin = '50px 18px';
+    const rp = document.createElementNS(ns, 'path');
+    rp.setAttribute('d', 'M50,18 Q68,4 92,12 Q82,16 70,16 Q60,17 50,18Z');
+    rp.setAttribute('fill', `rgba(230,235,225,${opacity})`); rp.setAttribute('stroke', `rgba(160,175,160,${opacity*0.4})`); rp.setAttribute('stroke-width','0.4');
+    rg.appendChild(rp);
+    const body = document.createElementNS(ns, 'ellipse');
+    body.setAttribute('cx','52'); body.setAttribute('cy','18'); body.setAttribute('rx','8'); body.setAttribute('ry','3.5');
+    body.setAttribute('fill', `rgba(242,242,238,${opacity})`);
+    const head = document.createElementNS(ns, 'ellipse');
+    head.setAttribute('cx','60'); head.setAttribute('cy','15'); head.setAttribute('rx','4.5'); head.setAttribute('ry','3');
+    head.setAttribute('fill', `rgba(242,242,238,${opacity})`);
+    const beak = document.createElementNS(ns, 'path');
+    beak.setAttribute('d','M63.5,14.5 L69,15.5 L63.5,16.5Z'); beak.setAttribute('fill',`rgba(190,155,90,${opacity})`);
+    const tail = document.createElementNS(ns, 'path');
+    tail.setAttribute('d','M44,20 Q47,27 50,23 Q53,27 56,20'); tail.setAttribute('fill',`rgba(225,228,222,${opacity*0.85})`);
+    svg.appendChild(tail); svg.appendChild(lg); svg.appendChild(rg); svg.appendChild(body); svg.appendChild(head); svg.appendChild(beak);
+    return svg;
+  }
   for (let i = 0; i < 14; i++) {
-    const w = document.createElement('div'); w.className = 'bird';
-    const sz=12+Math.random()*18,t=3+Math.random()*60,d=9+Math.random()*13,dy=(Math.random()-.5)*50,dl=-Math.random()*d;
-    w.style.cssText=`top:${t}%;left:0;--dy:${dy}px;animation-duration:${d}s;animation-delay:${dl}s`;
-    const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
-    svg.setAttribute('width',sz);svg.setAttribute('height',sz*.5);svg.setAttribute('viewBox','0 0 40 20');svg.classList.add('bird-svg');
-    svg.style.animationDuration=(.3+Math.random()*.2)+'s';
-    const p=document.createElementNS(ns,'path');
-    p.setAttribute('d','M0,10 Q5,2 10,8 Q15,3 20,10 Q25,3 30,8 Q35,2 40,10');
-    p.setAttribute('stroke',`rgba(60,80,100,${.4+Math.random()*.35})`);p.setAttribute('stroke-width','1.6');p.setAttribute('fill','none');p.setAttribute('stroke-linecap','round');
-    svg.appendChild(p);w.appendChild(svg);c.appendChild(w);
+    const size = 12 + Math.random() * 18, top = 3 + Math.random() * 60;
+    const dur = 9 + Math.random() * 13, dy = (Math.random()-.5)*50, delay = -Math.random()*dur;
+    const opacity = 0.5 + Math.random() * 0.4, flapDur = 0.28 + Math.random() * 0.22;
+    const wrap = document.createElement('div'); wrap.className = 'bird';
+    wrap.style.cssText = `top:${top}%;left:0;--dy:${dy}px;animation-duration:${dur}s;animation-delay:${delay}s`;
+    wrap.appendChild(makeBird(size, opacity, flapDur)); container.appendChild(wrap);
   }
 })();
 
